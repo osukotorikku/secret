@@ -2,6 +2,7 @@ import json
 import requests
 import datetime
 from collections import defaultdict
+import time
 
 class Webhook:
 	def __init__(self, url, **kwargs):
@@ -24,7 +25,7 @@ class Webhook:
 		self.thumbnail = kwargs.get('thumbnail')
 		self.footer = kwargs.get('footer')
 		self.footer_icon = kwargs.get('footer_icon')
-		self.ts = kwargs.get('ts')
+		self.ts = kwargs.get('ts', True)
 
 
 	def add_field(self,**kwargs):
@@ -64,7 +65,7 @@ class Webhook:
 	def set_footer(self,**kwargs):
 		self.footer = kwargs.get('text')
 		self.footer_icon = kwargs.get('icon')
-		ts = kwargs.get('ts')
+		ts = kwargs.get('ts', True)
 		if ts == True:
 			self.ts = str(datetime.datetime.utcfromtimestamp(time.time()))
 		else:
